@@ -1,31 +1,26 @@
-\documentclass[usenatbib,useAMS]{mnras}
+\documentclass[useAMS,usenatbib]{mnras}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 \usepackage{newtxtext,newtxmath}
 
-%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
 
-% Only include extra packages if you really need them. Common packages are:
-\usepackage{graphicx}	% Including figure files
-\usepackage{amsmath}	% Advanced maths commands
-% \usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{amsfonts}
-\usepackage{multicol}   % Multi-column entries in tables
-\usepackage{bm}		    % Bold maths symbols, including upright Greek
-\usepackage{pdflscape}	% Landscape pages
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{pdflscape}
 \usepackage{acro}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{tikz}
-\usepackage{algorithm} 
+\usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage[capitalise]{cleveref}
 \usepackage[normalem]{ulem}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
 \definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
 
 \newcommand{\rs}[1]{\textcolor{magenta}{[{\bf RS says}: #1]}}
@@ -49,21 +44,10 @@
 
 
 
-\DeclareAcronym{DM}{
-  short = DM,
-  long  = dark matter
-}
+\DeclareAcronym{DM}{short = DM, long  = dark matter}
 
-% \DeclareAcronym{AGN}{
-%   short = AGN,
-%   long  = active galactic nucleus,
-%   long-plural = active galactic nuclei
-% }
 
-\DeclareAcronym{NN}{
-  short = NN,
-  long  = neural network
-}
+\DeclareAcronym{NN}{short = NN, long  = neural network}
 
 
 %%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
@@ -71,12 +55,12 @@
 \title[The scatter in the galaxy--halo connection]{The scatter in the galaxy--halo connection: a machine learning analysis}
 
 \author[R. Stiskalek et al.]
-{Richard Stiskalek,$^{1}$\thanks{\href{mailto:richard.stiskalek@protonmail.com}{richard.stiskalek@protonmail.com}} 
+{Richard Stiskalek,$^{1}$\thanks{\href{mailto:richard.stiskalek@protonmail.com}{richard.stiskalek@protonmail.com}}
 Deaglan J. Bartlett,$^{2}$\thanks{\href{mailto:deaglan.bartlett@physics.ox.ac.uk}{deaglan.bartlett@physics.ox.ac.uk}}
 Harry Desmond,$^{2,3,4}$\thanks{\href{mailto:harry.desmond@port.ac.uk}{harry.desmond@port.ac.uk}}
 and Dhayaa Anbajagane$^{5,6}$\thanks{\href{mailto:dhayaa@uchicago.edu}{dhayaa@uchicago.edu}}
-\\ 
-% 
+\\
+%
 $^{1}$Universit\"{a}ts-Sternwarte, Ludwig-Maximilians-Universit\"{a}t M\"{u}nchen, Scheinerstr. 1, 81679 München, Germany\\
 $^{2}$Astrophysics, University of Oxford, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, UK\\
 $^{3}$McWilliams Center for Cosmology, Department of Physics, Carnegie Mellon University, 5000 Forbes Ave, Pittsburgh, PA 15213, USA\\
@@ -85,21 +69,16 @@ $^5$Department of Astronomy and Astrophysics, University of Chicago, 5640 S. Ell
 $^6$Kavli Institute for Cosmological Physics, University of Chicago, 5640 S. Ellis Ave, Chicago, IL 60637, USA
 }
 
-% These dates will be filled out by the publisher
 \date{Accepted 2022 June 7. Received 2022 May 30; in original form 2022 February 28}
-
-% Enter the current year, for the copyright statements etc.
 \pubyear{2021}
 
-% Don't change these lines
+
 \begin{document}
 \label{firstpage}
 \pagerange{\pageref{firstpage}--\pageref{lastpage}}
 \maketitle
 
-% Abstract of the paper
 \begin{abstract}
-% \hd{rewrote this}
 We apply machine learning, a powerful method for uncovering complex correlations in high-dimensional data, to the galaxy--halo connection of cosmological hydrodynamical simulations. The mapping between galaxy and halo variables is stochastic in the absence of perfect information, but conventional machine learning models are deterministic and hence cannot capture its intrinsic scatter. To overcome this limitation, we design an ensemble of neural networks with a Gaussian loss function that predict probability distributions, allowing us to model statistical uncertainties in the galaxy--halo connection as well as its best-fit trends. We extract a number of galaxy and halo variables from the Horizon-AGN and IllustrisTNG100-1 simulations and quantify the extent to which knowledge of some subset of one enables prediction of the other. This allows us to identify the key features of the galaxy--halo connection and investigate the origin of its scatter in various projections. We find that while halo properties beyond mass account for up to $50$ per cent of the scatter in the halo-to-stellar mass relation, the prediction of stellar half-mass radius or total gas mass is not substantially improved by adding further halo properties. We also use these results to investigate semi-analytic models for galaxy size in the two simulations, finding that assumptions relating galaxy size to halo size or spin are not successful.
 \end{abstract}
 
@@ -135,7 +114,6 @@ We describe the simulations we use in~\Cref{sec:Cosmological simulations}, and t
 For one of our training sets, we consider the galaxies and their corresponding haloes in the $(100 {\rm \, Mpc}/h)^3$ cosmological hydrodynamical simulation Horizon-AGN\footnote{\url{http://www.horizon-simulation.org/about.html}} (henceforth H-AGN)~\citep{Dubois_2014}. This adopts a standard $\Lambda$CDM cosmology consistent with WMAP-7~\citep{Komatsu_2011} and therefore has total matter density $\Omega_{\rm m} = 0.272$, dark energy density $\Omega_{\rm \Lambda} = 0.728$, amplitude of the matter power spectrum $\sigma_8 = 0.81$, baryon density $\Omega_{\rm b} = 0.045$, Hubble constant $H_0 = 70.4 \, {\rm \, km \, s^{-1} \, Mpc^{-1}}$, and power spectrum slope $n_{\rm s} = 0.967$.
 
 Using $1024^3$ \ac{DM} particles to give a \ac{DM} mass resolution of $M_{\rm DM, \, res} = 8 \times 10^7 {\rm \, M_{\sun}}$, the simulation is run with the Adaptive Mesh Refinement code \textsc{ramses}~\citep{Teyssier_2002}, with cells refined whenever the mass in that cell surpasses 8 times the initial mass resolution, up to an effective physical resolution of $1{\rm \, kpc}$. Stars can form when the hydrogen number density exceeds $n_{\rm H} \geq 0.1 {\rm \, H \, cm^{-3}}$, yielding a stellar mass resolution of $M_{\rm \star, \, res} \approx 2 \times 10^6 {\rm \, M_{\sun}}$, and this process follows a Schmidt law with a $1$ per cent efficiency~\citep{Rasera_2006}. Baryonic effects such as background UV heating, gas cooling (including a contribution from metals), feedback from stellar winds and type Ia and type II supernovae assuming a Salpeter initial mass function (IMF)~\citep{Dubois_2008,taysun2012a} are also incorporated in the simulation. Following~\cite{Dubois_2013} we split the gas associated with each galaxy into the following four phases by its temperature $T$ and hydrogen number density $n_{\rm H}$
-% 
 \begin{itemize}
     \item Star forming: $n_{\rm H} \geq 0.1~\mathrm{H~cm}^{-3}$, which is the star formation threshold in H-AGN,
     \item Hot diffuse: $n_{\rm H} < 0.1~\mathrm{H~cm}^{-3}$ and $T\geq 10^5~\mathrm{K}$,
@@ -175,12 +153,10 @@ In general, a key difference between simulation properties is that the H-AGN pro
 \subsubsection{Subhalo/galaxy mass and radius}\label{sec:Mass_Radius}
 
 The subhalo radius is utilised to define the subhalo mass, in addition to being an input property in our method, so we begin by describing it. For H-AGN, this is obtained by binning the DM particles in concentric ellipsoidal shells, and determining the outermost shell for which the virial theorem is satisfied to within $20$ per cent. The virial radius, $R_{\rm vir}$, is defined to be the geometric mean of the three axis radii of this ellipsoid. If no such shell exists, then the virial radius is defined to be the largest radius within which the mean density exceeds that expected from a spherical top-hat model. For parent haloes this procedure yields a near one-to-one relation between the radius and virial mass. This matches the typical virial radius definition:
-% 
 \begin{equation}\label{eqn:virmass}
     \Bar{\rho}(<R_{\rm vir}) \equiv \frac{M(<R_{\rm vir})}{\frac{4}{3}\pi R_{\rm vir}^3} = \Delta_{\rm vir}\rho_c,
 \end{equation}
-% 
-where $\Bar{\rho}$ is the average enclosed density, $M(<r)$ is the enclosed mass, $\Delta_{\rm vir}$ is the overdensity as defined in~\citet{BryanNorman1998}, and $\rho_c$ is the critical density of the Universe at the present epoch. For subhaloes the radius specified in~\cref{eqn:virmass} acts as an upper limit, with a significant fraction having smaller sizes. Therefore, H-AGN subhaloes' sizes may be an informative quantity even when their masses are already included in the feature set. %HD: We also consider R_h for centrals I believe. RS: only in TNG}
+where $\Bar{\rho}$ is the average enclosed density, $M(<r)$ is the enclosed mass, $\Delta_{\rm vir}$ is the overdensity as defined in~\citet{BryanNorman1998}, and $\rho_c$ is the critical density of the Universe at the present epoch. For subhaloes the radius specified in~\cref{eqn:virmass} acts as an upper limit, with a significant fraction having smaller sizes. Therefore, H-AGN subhaloes' sizes may be an informative quantity even when their masses are already included in the feature set.
 
 In TNG parent haloes the virial radius is defined to obey~\cref{eqn:virmass}. For TNG, we define the subhalo radius as the radial distance to the furthest gravitationally bound DM particle in the subhalo particle set determined by the \textsc{subfind} algorithm. Henceforth, we refer to all subhalo radii as $R_h$. The subhalo masses for both H-AGN and TNG are then simply the total mass of all available DM particles within $r < R_{\rm h}$.
 In TNG subhaloes we define the virial mass of the host halo as $M_{\rm vir}^{\rm P} \equiv M(<R_{\rm vir})$. On the other hand, for H-AGN subhaloes we define $M_{\rm vir}^{\rm P}$ to be the virial DM mass of their parent haloes.
@@ -212,11 +188,9 @@ We parameterise the shape of a subhalo/galaxy by first calculating the inertia t
     I^a_{ij} = \frac{1}{M_{\rm a}} \sum_n m_{\rm a}^{\left( n \right)} x_i^{\left( n \right)}x_j^{\left( n \right)},
 \end{equation}
 where the sum runs over the particles of type ``a'' (where ``a'' is \ac{DM} when computing \ac{DM} subhalo shapes, and stars when computing galaxy shapes), each of mass $m_a^{\left( n \right)}$ and at position $\bm{x}^{\left( n \right)} = \left(x^{\left(n\right)}_1, x^{\left( n \right)}_2, x^{\left( n \right)}_3 \right)^\intercal$. The total mass of the particle set is denoted $M_a$. We diagonalise $I^a_{ij}$ to find the eigenvalues $\mathcal{A}_a^2 \geq \mathcal{B}_a^2 \geq \mathcal{C}_a^2$, where $\mathcal{A}_a,\mathcal{B}_a,\mathcal{C}_a > 0$~\citep{Chisari_2015}. We use the ratios of the eigenvalues (i.e. the principal axes) to obtain two shapes,
-% 
 \begin{equation}
     s_a \equiv \mathcal{C}_a/\mathcal{A}_a, \quad q_a \equiv \mathcal{B}_a/\mathcal{A}_a,
 \end{equation}
-% 
 conforming to the notation of denoting halo properties with subscript ``h'' and galaxy properties with subscript ``g''.
 
 As with \ac{DM} concentration, we compare the TNG central subhalo shapes with the TNG catalogues of~\citet*{Anbajagane_2022}, who computed \ac{DM} shapes by selecting particles within a chosen spherical aperture. Given we instead use the full \ac{DM} subhalo (as determined by \textsc{subfind}) without any spherical cut, the shapes we find are $5-10$ per cent more elliptical, i.e. the ratios $s_{\rm h}$ and $q_{\rm h}$ are lower. This is an expected feature due to the difference in particle selection~\citep{Zemp2011Shapes}. However, the functional form of the shape-mass relation is the
@@ -233,11 +207,9 @@ where $\Vec{J}_{\{h,\,g\}}$ is the sum of the angular momenta of the particles, 
 \subsubsection{Other galaxy properties}\label{sec:other_gal_props}
 
 We use the time-averaged SFR, defined as
-% 
 \begin{equation}
     {\rm SFR} = \frac{M_\star(\Delta t)}{\Delta t},
 \end{equation}
-% 
 where $M_\star(\Delta t)$ is the total stellar mass formed over the last $\Delta t$ years. For the time-scale, we use $300$ Myr for H-AGN and $200$ Myr in TNG, with the difference purely set by the available catalogues. For TNG, we obtain this quantity from the publicly released catalogues~\citep{Donnari_2019, Pillepich_2019}.
 
 The mass-weighted mean stellar metallicity, $Z$, is computed using stellar particles within twice the stellar half-mass radius of the subhalo centre. We also consider the galaxy rest-frame photometry, namely the absolute magnitudes $M_u, M_g, M_r, M_i$ computed using the \textit{u, g, r, i} band filters of the Sloan Digital Sky Survey~\citep{Kaviraj_2017,Laigle_2019}. The magnitude of a galaxy is obtained by summing up the luminosities of individual stellar particles.
@@ -296,9 +268,9 @@ Consider the correlation between two quantities $X$ and $Y$, where we wish to pr
 \end{equation}
 where $Y_g$ is the value of $Y$ for galaxy $g$, $\{ Y_g \}_i \equiv \{ Y_g : g \in B_i \}$, and $\mathcal{N}( Y_g | \mu_i, \sigma^2_i )$ is a Gaussian of mean $\mu_{i}$ and variance $\sigma_i^2$. Given a prior, $p \left( \mu_i, \sigma_i \right)$, on $\mu_i$ and $\sigma_i$, we use Bayes' theorem to obtain the posterior distributions of $\mu_i$ and $\sigma_i$,
 \begin{equation}
-	p \left(\mu_i, \sigma_i^2| \{ Y_g \}_i \right) 
+	p \left(\mu_i, \sigma_i^2| \{ Y_g \}_i \right)
     \propto \mathcal{L} \left(\{ Y_g \}_i|\mu_i, \sigma_i \right) p \left( \mu_i, \sigma_i \right) ,
-\end{equation}	
+\end{equation}
 which we sample using the Markov chain Monte Carlo sampler \textsc{EPSIE}\footnote{\href{https://cdcapano.github.io/epsie/latest/index.html}{www.cdcapano.github.io/epsie}}~\citep{epsie}. Within each bin $B_i$ we assume a uniform prior on $\mu_i$ between the minimum and maximum values of  $\{Y_{\rm g}\}_i$ and a uniform prior on $\sigma_i$ between $0$ and the difference between the maximum and minimum values of $\{Y_{\rm g}\}_i$.
 
 We run this procedure separately for each $B_i$ and obtain samples from the two-dimensional posterior distributions. We find the one-dimensional marginalised posterior for each $\sigma_i$,
@@ -312,10 +284,7 @@ Note that the above models the scatter as being in the $Y$ direction, which is a
 
 \subsection{Machine learning preprocessing}\label{sec:preprocess}
 
-We split the data into into training ($80$ per cent) and test ($20$ per cent) sets using a stratified shuffle split, ensuring that the split preserves the same fraction of samples as in the original set when binned by the target property. We reserve $20$ per cent of the training set for validation, which is used for either hyperparameter selection or deciding whether to continue training.
-%a machine learning model.
-The test set remains unseen during training and is only used to evaluate the performance of a trained model. All results are evaluated on the test set.
-%In what follows we always quote and plot results evaluated on the test set.
+We split the data into into training ($80$ per cent) and test ($20$ per cent) sets using a stratified shuffle split, ensuring that the split preserves the same fraction of samples as in the original set when binned by the target property. We reserve $20$ per cent of the training set for validation, which is used for either hyperparameter selection or deciding whether to continue training. The test set remains unseen during training and is only used to evaluate the performance of a trained model. All results are evaluated on the test set.
 
 To account for the fact that most galaxy and halo properties span large dynamic ranges we work with their logarithms, except in case of magnitudes, principle axes ratios and star metallicity. We apply the ``standard'' scaling to transform the features, enforcing a mean of $0$ and variance of $1$. We also transform the features into an orthogonal basis (as outlined below) because most machine learning algorithms display marginally superior performance on uncorrelated features. All transformations are fitted on the training set.
 
@@ -323,16 +292,13 @@ The properties of galaxies and haloes quoted in the simulation catalogues form a
 
 \subsection{Neural network architecture}\label{sec:NNarchitecture}
 
-% NN introduction
 To model the galaxy--halo connection we use an ensemble of feed-forward \acp{NN} with a Gaussian loss function. A feed-forward NN defines a mapping $\mathcal{F}: \mathbb{R}^m \rightarrow \mathbb{R}^n$ with $m$ input nodes (input layer) and $n$ output nodes (output layer), possibly with hidden layers in between. The simplest fully connected NN with no hidden layers is a single-layer perceptron which connects the input layer $m$-dimensional vector $x_i$ directly to the output $n$-dimensional vector $y_i$ such that
 \begin{equation}
 	y_i = f\left(\sum_{j=1}^{n} W_{ij} x_j + b_i\right),
 \end{equation}
 where $W_{ij}$ is a $n\times m$-dimensional matrix of weights and $b_i$ is a bias vector, both of which are trainable parameters, and $f(\cdot)$ is an activation function. For a network with matrix multiplication layers (as outlined above) to learn a non-linear mapping, the activation function $f(\cdot)$ must be non-linear. Common choices of $f(\cdot)$ are the sigmoid function or hyperbolic tangent. If a network contains hidden layers then the vector $y_i$ is  used as input to the next layer. It has been shown that a NN is capable of approximating any Borel-measurable function to any desired accuracy, thus acting as a universal approximator, provided sufficient hidden nodes are used~\citep{Hornik_universal_approximator}.
 
-% Activation function
 We choose a scaled exponential linear unit (SELU) activation function~\citep{Klambauer_SELU}, defined as
-% . SELU is defined as:
 \begin{equation}
     f(x) = \lambda
     \begin{cases}
@@ -342,21 +308,17 @@ We choose a scaled exponential linear unit (SELU) activation function~\citep{Kla
 \end{equation}
 where $\lambda = 1.05$ and $\alpha = 1.67$ are chosen to induce self-normalisation of the network, which preserves zero mean and unit variance between consecutive layers if the initial weights are drawn to satisfy these constraints on average. Networks with the SELU activation are robust to perturbations, can be efficiently used to train deep feed-forward networks and avoid the problem of vanishing or diverging gradients~\citep{Klambauer_SELU}.
 
-% NN Training
 The network parameters are trained by minimising a loss function, $L$, which assesses the closeness of the prediction $\mathcal{F}(\bm{x})$ to $\bm{y}$. We train the network on known tuples of features and targets $\left\{\bm{x}, \bm{y}\right\}$ (\emph{supervised learning}). They are fitted using backpropagation which computes the gradient of $L$ with respect to the trainable parameters~\citep{Rumelhart_backprop}. With the gradient available the optimal set of parameters can be found via e.g. a gradient descent algorithm.
 
-% Training again
 During training, the gradient descent optimiser searches the parameter space of network weights and bias vectors until a global minimum is found. If the loss function is interpreted as the negative log-likelihood, then the minimum corresponds to the maximum-likelihood estimate. However, in practice the parameter space has a complex structure and, therefore, the optimiser can converge to a local minimum instead.
 
-% NN loss
-A common loss function used to infer the optimal networks parameters is the mean square error (MSE). MSE can be viewed as optimising the mean network prediction, without assessing the prediction uncertainty. To account for the uncertainty~\cite{Nix_mean_variance} suggest to use as a loss function the negative log-likelihood of a Gaussian distribution: 
+A common loss function used to infer the optimal networks parameters is the mean square error (MSE). MSE can be viewed as optimising the mean network prediction, without assessing the prediction uncertainty. To account for the uncertainty~\cite{Nix_mean_variance} suggest to use as a loss function the negative log-likelihood of a Gaussian distribution:
 \begin{equation}
     \label{eq:Gaussian loss function}
-    L\left(\left\{y\right\} | \left\{\bm{x}\right\}, \bm{\bm{\theta}}\right) 
+    L\left(\left\{y\right\} | \left\{\bm{x}\right\}, \bm{\bm{\theta}}\right)
     =  \sum_k\left[ \ln \sigma_{\bm{\theta}}^{2}(\bm{x}^k) + \frac{\left(y^k - \mathcal{F}_{\bm{\theta}}(\bm{x}^k)\right)^2}{2\sigma_{\bm{\theta}}^{2}(\bm{x}^k)}\right] + \mathrm{const.},
 \end{equation}
 where $\bm{\theta}$ denotes the network's parameters, $\mathcal{F}_{\bm{\theta}} (\bm{x}^k)$ and $\sigma_{\bm{\theta}}(\bm{x}^k)$ are the network's mean prediction and standard deviation, respectively, and $k$ indexes the tuples of features and targets. In practice, this is achieved by having the network's final layer output two values: both the mean and standard deviation of the Gaussian. We apply a so-called soft-plus transformation to the standard deviation to enforce positivity:
-% 
 \begin{equation}
     \sigma_{\bm{\theta}} \to \ln \left( 1 + e^{\sigma_{\bm{\theta}}} \right).
 \end{equation}
@@ -371,19 +333,15 @@ We obtain the adversarial samples $\bm{x}^\prime$ following the fast gradient si
 where $\epsilon$ is the constant adversarial step size~\citep{Goodfellow_adversarial_examples}. The target $y$ of each sample remains unchanged under the adversarial attack.
 Ensembles of base models typically improve the predictive power~\citep{Dietterich_ensembles}. Building an ensemble typically requires a randomisation scheme to decrease the correlation between the individual base learners. However, the training of a \ac{NN} is a stochastic process which already provides the necessary randomisation to decorrelate the base learners, thus avoiding the need for e.g. bootstrap aggregating as is done with Random Forests (described in~\cref{sec:decision_trees}).
 
-% Architecture we use
 For our \ac{NN} architecture, we use a wide and deep neural network (WDNN) suggested in~\cite{Cheng_wide_deep} and used to model the galaxy--halo connection in~\cite{Moster_GalaxyNet}. A WDNN consists of a wide part which connects the input layer directly to the output layer and a multi-layer perceptron part with several hidden layers. The outputs of both parts are added. An advantage of WDNN is that it learns the linear relations through the wide part, while non-linear relation can be learnt through the deep part of the network. This improves the network's generalisation to unseen samples without loss of accuracy and also improves the network's convergence.
 
-% Implementation details.
 We implement the ensemble of WDNN networks trained with adversarial examples in \textsc{TensorFlow}\footnote{\url{https://www.tensorflow.org}}~\citep{tensorflow2015-whitepaper} and \textsc{TensorFlow Probability}\footnote{\url{https://www.tensorflow.org/probability/}}~\citep{TensorFlow_probability}. The \ac{NN} hyperparameters include the number, type and size of hidden layers, activation function, choice of the gradient descent algorithm and its own hyperparameters, and training procedure. Our procedure for selecting these is as follows.
 
-% Hyperparameters
 The network's input layer is normalising: it removes the training samples' mean and rescales them to unit variance. The deep part of the base WDNN network contains $16\times 16\times 16\times 16 \times 8$ hidden nodes whose weights we initialise with the LeCun normal initialiser~\citep{lecun-98b} with the SELU activation function.  We choose the ensemble size to be $250$, the adversarial loss function's weight to be $0.5$,the adversarial step size to be $\epsilon=0.001$, and use the Adam stochastic optimiser~\citep{Adam_Kingma} to find the optimal network parameters with a decaying learning schedule. We set the initial rate to $0.004$ and enforce it to decay by a factor of $1.3$ every $3000$ iterations.
 During training the training set is split into batches of size $1000$. These batches are used to update the networks' weights. A single iteration through all batches defines one epoch and we train the networks until the loss function evaluated on the validation set has not lowered for at least $100$ epochs. The samples in the validation set are \emph{not} used to update the network's weights.
 We make our \ac{NN} implementation publicly available at \url{https://github.com/Richard-Sti/scatternn}.
 
-\subsection{Quantifying the neural networks' predictions}
-\label{sec:NN_prediction}
+\subsection{Quantifying the neural networks' predictions}\label{sec:NN_prediction}
 
 The {\it q}\textsuperscript{th} base network of the ensemble returns a Gaussian distribution on a target property $y$ centred at $\mu_q$ with standard deviation $\sigma_q$. We average the individual Gaussian distributions, yielding a distribution that can be summarised with mean and variance, respectively
 \begin{subequations}\label{eq:Combine NN}
@@ -399,16 +357,12 @@ The ensemble of \acp{NN} models the scatter in galaxy (halo) quantities conditio
 We compare the bivariate scatter to the \acp{NN}' scatter. If the \acp{NN} are aware of only the property on which the bivariate scatter is conditioned, then we we expect the two to be approximately equal as both are fitting a Gaussian conditioned on the same quantity. However, if the networks learn from other informative properties as well, then the networks' predictions will be not only more precise, i.e. with lower scatter, but this scatter will also be less uncertain.
 
 
-\subsection{Decision tree ensemble}
-\label{sec:decision_trees}
+\subsection{Decision tree ensemble}\label{sec:decision_trees}
 
-% Decision tree basics.
 To check the results of our network against a completely different architecture, we also consider non-parametric regression by means of a decision tree ensemble. A decision tree is built from the ``root'' node, which contains the entire training set, by recursively splitting the training set into more homogeneous ``child'' nodes. This is achieved by minimising some loss function $L$ at each split. Typically, in regression the split is chosen such that it minimises the weighted variance of the samples assigned to the left and right child nodes. If the $i$th sample contains several features then the split is chosen along the one that minimises $L$. The splitting is done recursively until a termination condition is met, e.g. the node's variance is zero, it contains only a single sample or a maximum tree depth is reached. Prediction on unseen samples is performed by propagating an input feature vector to a terminal leaf and, in regression, returning the mean value of all training sample targets assigned to the particular terminal leaf.
 
-% Overfitting and ensembles
 If the maximum depth of a decision tree is not capped it can ``memorise'' the entire training set. Because of this over-fitting such unregulated decision trees do not generalise well to unseen samples. To account for this the tree can either be ``pruned'' by removing branches with only a small increase in homogeneity, or randomised. A popular algorithm is the Random Forest (RF) which builds an ensemble of decision trees~\citep{Breiman_2001_RandomForest}. RF injects randomness into the ensemble by training the trees on bootstrap aggregated samples and randomly selecting the number of features that are considered for an optimal split. The RF's prediction is the average of the values returned by its constituent trees.
 
-% ExtraTrees
 Another ensemble algorithm choice is the Extremely Randomised Trees (Extra-Trees)~\citep{Geurts_2006_ExtraTrees}. Unlike RF, Extra-Trees trees are all grown on the same original sample and randomness is injected in the splitting. After randomly selecting $k$ out of $m$ features, each feature's threshold is \emph{randomly} selected, instead of calculating the optimal threshold, with the best threshold being used to split the node. By picking the thresholds at random the computational cost of training is significantly reduced, while also reducing the model's variance at the cost of a small increase in bias. Moreover, in most applications---including ours---Extra-Trees is as good a predictor as RF, and we will therefore use it as an alternative to our NN model. While Extra-Trees and the other aforementioned tree-based models yield purely deterministic predictions, there exist decision tree models that model the statistical uncertainty~\citep[e.g.][]{BART, NGBoost}. However, we do not consider these here.
 
 We use the \textsc{scikit-learn}\footnote{\url{https://scikit-learn.org/}}~\citep{scikit-learn} implementation of Extra-Trees \textsc{ExtraTreesRegressor}. We find the optimal hyperparameters via a grid search, choosing from $\textsc{n\_estimators}=64, 128$, $\textsc{min\_samples\_split}=8, 16, 32$, $\textsc{max\_samples} = 0.5, 1$ and keeping the default values for the remaining hyperparameters.
@@ -424,26 +378,19 @@ To assess the goodness-of-fit of the mean NN ensemble or Extra-Trees predictions
 \end{equation}
 where the sums run over the (test set) samples, $\mathcal{F}(\bm{x}_i)$ is the predicted value,  and $\hat{y}$ is the mean target value on the test set. $R^2$ is upper bounded by 1, which signifies perfect predictions (zero residuals). Lower values indicate worse predictions. If $R^2 = 0$ the model only learns to predict the mean value $\hat{y}$ and $R^2 < 0$ signifies a non-informative model whose predictions are imbalanced with respect to the true values on average.
 
-% Feature selection
 We select important features for predicting a given target by first considering an original set of $N$ features. Then, we train Extra-Trees on all $N$ features individually and select the one that yields the highest $R^2$ on the test set. We keep this feature and, one at a time, add additional properties from the remaining features. We keep whichever new property yields the maximum $R^2$ on the test set when used in conjunction with the features already included. Repeating this process, we end up with an ordered list of features and their $R^2$ increments. We consider as informative all features whose $R^2$ increment is more than $0.005$.
 
-% Spearman
 We use the Spearman's rank correlation coefficient $\rho_{\rm s}$ to determine whether the residuals are correlated with any other property that was not used in training. The Spearman coefficient is defined as the Pearson correlation coefficient between rank variables of two vectors, which are formed by replacing the vector's values by their increasing ranks. The Pearson coefficient of two vectors is given by their covariance divided by the product of their standard deviations. The Spearman coefficient is bounded to $\left[-1, 1\right]$, such that $+1$ signifies a correlated monotonic relation and $-1$ an anti-correlated monotonic relation.
 
-% Correlating residuals
 Having found an ordered list of features that maximises the $R^2$ increments as described above, we calculate the Spearman correlation coefficient between residuals of a model trained on the first $n$ features and the next feature to be added. This will allow us to further interpret the significance of each added feature.
 
 
-\section{Correlations of the simulated galaxy--halo connections}
-\label{sec:Results}
+\section{Correlations of the simulated galaxy--halo connections}\label{sec:Results}
 
-\subsection{Halo to galaxy mapping}
-\label{sec:halo_to_galaxy}
+\subsection{Halo to galaxy mapping}\label{sec:halo_to_galaxy}
 
-% Features we use and targets
 We use the $z=0$ halo properties as features and for simplicity only the following galaxy properties as targets: stellar mass $M_\star$, total gas mass $M_{\rm gas}$ and stellar-half mass radius $R_{1/2}$ (see~\Cref{tab:properties}). Furthermore, in TNG we will also consider learning the mapping from halo properties to the neutral hydrogen mass $M_{\rm HI}$.
 
-% ML procedure
 For each galaxy target, we begin by training Extra-Trees to determine the important halo features separately in H-AGN and TNG central and satellite galaxies, as described in~\cref{sec:feature_selection}. Since the scatter in the galaxy--halo connection is not crucial for this part, we opt for Extra-Trees rather than the NN ensemble as it provides similar goodness-of-fit of the best-fit predictions while being computationally cheaper. Having determined the important features, we train the NN ensemble, first on the most important feature only, which we find to be $M_{\rm h}$ in all cases, and then we add the remaining important features for each target. We calculate the $R^2$ scores of the mean predictions on the test set, which we then compare to the equivalent inference using Extra-Trees, finding that the two typically agree to within $1$ per cent for well-predicted properties and to within $\sim$ 10 per cent if $R^2 \lessapprox 0.5$. Where there is disagreement, the \ac{NN} may outperform Extra-Trees.
 This gives us confidence to employ the \ac{NN} ensemble to measure the scatter of the relations. We compare the \ac{NN} ensemble scatter to the bivariate scatter around the mean in the relation $\log Y | \log M_{\rm h}$, where $Y$ represents one of the galaxy target properties. We illustrate the result by plotting mean and standard deviation of the predicted scatter of test set samples binned by $\log M_{\rm h}$.
 
@@ -460,7 +407,6 @@ We now proceed to describe our results for each separate galaxy target that we c
 
 \subsubsection{Predicting the stellar mass}\label{sec:mstar_pred}
 
-% H-AGN and TNG mean fit
 We begin by predicting the stellar mass $M_\star$. Using our feature selection routine outlined in~\Cref{sec:feature_selection} with Extra-Trees we find the maximum possible
 $R^2$ to be $0.92$/$0.95$ ($0.91$/$0.90$) in H-AGN/TNG centrals (satellites), which are calculated using all informative halo properties that yield $\Delta R^2 > 0.005$. The left column of~\cref{fig:halo2gal_R2} shows how the $R^2$ depends on the cumulative set of training features. We now describe the informative features in decreasing order of importance.
 
@@ -469,10 +415,8 @@ In H-AGN central galaxies the only important feature beyond $M_{\rm h}$ is $c_{\
 In TNG $M_{\rm h}$ by itself is a better predictor of $M_\star$ compared to H-AGN, corresponding to the tighter $M_\star - M_{\rm h}$ relation shown in~\cref{fig:sim_data}. For satellite galaxies, in H-AGN the important features beyond $M_{\rm h}$ are $R_{\rm h}$ and $c_{\rm h}$. Similarly, in TNG satellites the other relevant features are $R_{\rm h}$, $c_{\rm h}$, $M_{\rm vir}^{P}$ and $\lambda_{\rm h}$, the importances of which are similarly shown in~\cref{fig:halo2gal_R2}. In both simulations we find that after accounting for the $M_{\rm h}$ dependence the halo size $R_{\rm h}$ is anti-correlated with $M_\star$ (``circle'' marker symbol).
 
 
-% M_\star H-AGN scatter
 We now move to a study of the scatter in the galaxy--halo correlations. We indicate the bivariate scatter $\sigma_{\log M_\star | \log M_{\rm h}}$ as the black dashed line in~\cref{fig:NNscatter_Mstar} for both H-AGN and and TNG. The simulations agree that above $M_\mathrm{h} \approx 10^{12} M_\odot$ the scatter is $\sim0.15$ and $\sim0.2~\mathrm{dex}$ for centrals and satellites, respectively. Below this mass the scatter starts growing until $M_\mathrm{h} \approx 10^{11} M_\odot$, where it artificially peaks due to the lower limit on $M_\star$ that we impose in both simulations. In H-AGN centrals the scatter peaks $\sim 0.05~\mathrm{dex}$ higher than in TNG centrals, reflecting the tighter $M_\star - M_{\rm vir}$ relation shown in~\cref{fig:sim_data}. The rise in vertical scatter is largely a consequence of the steepening of the $M_\star-M_\text{h}$ relation at the faint end (see~\cref{fig:sim_data}).
 
-% Scatter stuff
 We train the NN ensemble model on the features found above to be important. In all cases, we verify that the best-fit predictions and scatter are consistent with the true values on the test set by inspecting the fraction of objects with true target properties lying within the scatter interval. We plot the NN predicted scatter as the blue and orange bands in~\cref{fig:NNscatter_Mstar}, again binned by halo mass for direct comparison with the bivariate scatter. In all cases, training the ensemble on $M_\mathrm{h}$ alone correctly recovers the scatter in the simulations' $\log M_\star | \log M_\mathrm{h}$ relations, showing that the ensemble is able to capture the nonlinear $M_\star-M_\text{h}$ relation.
 
 In H-AGN centrals the addition of $c_{\rm h}$ reduces the scatter below $M_{\rm h}\approx 10^{12} M_\odot$, whereas in TNG centrals the correlation of $M_\star-M_\text{h}$ residuals with $\lambda_{\rm h}$, $R_{\rm h}$ and $c_{\rm h}$ explains up to $0.05~{\rm dex}$ of the scatter across the considered halo mass range. More so in H-AGN satellites, $R_{\rm h}$ and $c_{\rm h}$ reduce scatter across all halo masses, particularly at lower halo masses (up to $0.2~{\rm dex}$), with similar behaviour observed in TNG. Therefore, even though the bivariate scatter $\sigma_{\log M_\star | \log M_{\rm h}}$ in satellites is larger than in centrals, this can be attributed to residual correlations with secondary halo properties such that the scatter after taking these into account is similar.
@@ -494,8 +438,6 @@ We now move on to predicting the total gas mass, $M_{\rm gas}$. Using all inform
 
 In H-AGN central galaxies the two important features for predicting $M_{\rm gas}$ beyond halo mass are $c_{\rm h}$ and $\lambda_{\rm h}$, whereas in TNG centrals the only other relevant feature is $\lambda_{\rm h}$. In both cases the importances of beyond-$M_{\rm h}$ properties are however relatively low ($\Delta R^2 \lesssim 0.02$). For satellites, we find that in H-AGN the other important features are $R_{\rm h}$, $M_{\rm vir}^{\rm P}$ and $c_{\rm h}$, while in TNG these are $M_{\rm vir}^{\rm P}$, $\lambda_{\rm h}$, $R_{\rm h}$ and $c_{\rm h}$. In H-AGN, $R_{\rm h}$ is the second most important feature ($\Delta R^2 \approx 0.15$), whereas in TNG its importance is near-negligible after accounting for $M_{\rm vir}^{\rm P}$ and $\lambda_{\rm h}$. As we describe in~\Cref{sec:Mass_Radius}, in H-AGN $R_{\rm h}$ is the radius of the outermost shell within which the virial theorem remains satisfied. As a consequence, for satellite galaxies $R_{\rm h}$ is not uniquely determined by $M_{\rm h}$. On the other hand, in TNG we define $R_{\rm h}$ to be distance to the furthest gravitationally bound particle and, thus, it is not uniquely determined by $M_{\rm h}$ in either parent haloes or subhaloes. This makes it potentially informative even for a model that has already been trained on $M_{\rm h}$.
 
-
-% Mgas simulation scatter
 We calculate the bivariate scatter in the $\sigma_{\log M_\mathrm{gas} | \log M_{\rm h}}$ relation and plot it in~\cref{fig:NNscatter_Mgas} as the black dashed line. Focusing on H-AGN central galaxies first, we find a peak in scatter of $\sim 0.35~\mathrm{dex}$ at $M_{\rm h}\approx 10^{12.5} M_\odot$. In TNG central galaxies the scatter similarly peaks at this halo mass, though its scatter is lower by up to $0.1~{\rm dex}$. At this mass the contributions of the hot diffuse and star forming together with the cold gas are approximately equal and, since both trace $M_{\rm h}$ with a different slope and scatter, the total scatter is inflated. Below this mass the hot diffuse gas component is typically subdominant. The location of the peak is consistent with the halo mass at which AGN feedback first dominates galaxy evolution;~\citet*[see Figure 7]{Anbajagane_2022} confirm this for the TNG galaxy formation model by extracting the energetics of different baryonic processes (gas cooling, star formation, and AGN feedback) as a function of halo mass. The presence of AGN feedback is known to stop gas cooling within the halo and also expel some of the gas from the halo potential well. In TNG centrals we also note a large increase in scatter at low halo masses due to outlier simulated galaxies with artificially low star forming gas, likely due to the simulation's finite resolution. There is no prominent peak in either H-AGN nor TNG satellites where the scatter is approximately constant at $\sim0.35~{\rm dex}$ in both cases.
 
 The coloured bands in~\cref{fig:NNscatter_Mgas} show the NN ensemble scatter in $\log M_{\rm gas}$ binned by halo mass. In both H-AGN and TNG we first train the NN ensemble on $M_\mathrm{h}$ only, which correctly recovers the bivariate scatter $\sigma_{\log M_\mathrm{gas} | \log M_\mathrm{h}}$. In centrals, adding the other informative properties yields no significant decrease in either H-AGN nor TNG, showing that the scatter in $\sigma_{\log M_\mathrm{gas} | \log M_\mathrm{h}}$ is not significantly attributable to residual correlations with other halo features. On the other hand, in both H-AGN and TNG satellites the addition of secondary properties can reduce the scatter by up to $0.1~{\rm dex}$.
@@ -511,9 +453,7 @@ The coloured bands in~\cref{fig:NNscatter_Mgas} show the NN ensemble scatter in 
 
 \subsubsection{Predicting the neutral hydrogen mass}
 
-In TNG we also try predicting the neutral hydrogen mass $M_\mathrm{HI}$. With Extra-Trees we find maximum $R^2$ values of $0.47$ and $0.49$ in central and satellite galaxies, respectively, using all informative dark matter features. We show the $R^2$ score as a function of the cumulative feature set in~\cref{fig:neutral_hydrogen_R2s}.
-%In both cases, the most important halo feature is its mass $M_{\rm h}$.
-In central galaxies the important halo properties besides $M_{\rm h}$ are $\lambda_{\rm h}$, $s_{\rm h}$ and $c_{\rm h}$, though it is mainly  $\lambda_{\rm h}$ that improves the predictions ($\Delta R^2 \approx 0.075$). In satellite galaxies, the relevant secondary features are $M_{\rm vir}^{\rm P}$, $\lambda_{\rm h}$ and $c_{\rm h}$. While for central galaxies $\lambda_{\rm h}$ is the second most important feature and is positively correlated with $M_{\rm HI}$ after accounting for the $M_{\rm h}$ dependence, in satellites it is the third most important feature and is negatively correlated with $M_{\rm HI}$ after accounting for both $M_{\rm h}$ and $M_{\rm vir}^{\rm P}$.
+In TNG we also try predicting the neutral hydrogen mass $M_\mathrm{HI}$. With Extra-Trees we find maximum $R^2$ values of $0.47$ and $0.49$ in central and satellite galaxies, respectively, using all informative dark matter features. We show the $R^2$ score as a function of the cumulative feature set in~\cref{fig:neutral_hydrogen_R2s}. In central galaxies the important halo properties besides $M_{\rm h}$ are $\lambda_{\rm h}$, $s_{\rm h}$ and $c_{\rm h}$, though it is mainly  $\lambda_{\rm h}$ that improves the predictions ($\Delta R^2 \approx 0.075$). In satellite galaxies, the relevant secondary features are $M_{\rm vir}^{\rm P}$, $\lambda_{\rm h}$ and $c_{\rm h}$. While for central galaxies $\lambda_{\rm h}$ is the second most important feature and is positively correlated with $M_{\rm HI}$ after accounting for the $M_{\rm h}$ dependence, in satellites it is the third most important feature and is negatively correlated with $M_{\rm HI}$ after accounting for both $M_{\rm h}$ and $M_{\rm vir}^{\rm P}$.
 
 The scatter in the relation $\log M_\mathrm{HI} | \log M_{\rm h}$ is approximately constant at $0.40~\mathrm{dex}$ ($0.45~\mathrm{dex}$) in centrals (satellites), which is typically at least twice as large as the scatter in stellar mass. Because of the low $R^2$ and relatively low importance of features beyond $M_{\rm h}$, training the NN ensemble on such features can reduce the $M_{\rm HI} - M_{\rm h}$ scatter by at most $0.05~\mathrm{dex}$.
 
@@ -528,16 +468,12 @@ The scatter in the relation $\log M_\mathrm{HI} | \log M_{\rm h}$ is approximate
 
 \subsubsection{Predicting the stellar half-mass radius}
 
-% Reff mean predictions
 Predicting the stellar half-mass radius $R_{1/2}$ from halo properties, using Extra-Trees we arrive at a maximum $R^2$ of $0.67$/$0.47$ ($0.60$/$0.41$) in H-AGN/TNG centrals (satellites) when using all informative halo features ($\Delta R^2 > 0.005$). The right column in~\cref{fig:halo2gal_R2} shows the $R^2$ scores as a function of the cumulative feature set that maximises the $R^2$ increments.
-%In all cases the most important feature is the halo mass, $M_{\rm h}$.
 
 As we show in~\cref{fig:halo2gal_R2}, in H-AGN centrals the other important halo properties for predicting $R_{1/2}$ are $c_{\rm h}$ and $\lambda_{\rm h}$. In TNG centrals these are $\lambda_{\rm h}$, $s_{\rm h}$ and $c_{\rm h}$. However, in both simulations $R_{1/2}$ is poorly constrained and the addition of secondary features results in $\Delta R^2 \lesssim 0.05$. Looking at satellites, in H-AGN we see that the secondary important features are $R_{\mathrm h}$, $M_{\rm vir}^{\rm P}$, $c_{\rm h}$ and $\lambda_{\rm h}$, whereas in TNG these are $R_{\rm h}$, $\lambda_{\rm h}$, $s_{\rm h}$ and $M_{\rm vir}^{\rm P}$. In both cases the satellite $R_{1/2}$ is predicted worse than in central galaxies and $R_{\rm h}$ is the second most important feature, which is anti-correlated with $R_{1/2}$ after accounting for $M_{\rm h}$. These correlations are discussed further in the context of semi-empirical galaxy formation models in~\cref{sec:test_sam}.
 
-% R12 sim scatter
 The distribution $R_{1/2} - M_\mathrm{h}$ differs in H-AGN and TNG (see~\cref{fig:sim_data}) and, as a consequence, so does the scatter $\sigma_{\log R_{1/2} | \log M_\mathrm{h}}$ which we show in~\cref{fig:NNscatter_Reff}. In H-AGN the scatter is constant at $\sim 0.1~\mathrm{dex}$ in both centrals and satellites, though the scatter in satellites is higher by $\sim 10$ per cent. On the other hand, in TNG the distribution is wider, with the scatter peaking at $\sim 0.18~\mathrm{dex}$ at $M_\mathrm{h}\approx 10^{12} M_\odot$. This peak can be attributed to the fact that above it the galaxy stellar size is proportional to the halo virial mass with a relatively small scatter, whereas below it the relation's slope flattens and widens. At the peak's location the distribution of galaxy size at fixed virial mass has a heavy tail, deviating from a Gaussian distribution. This peak is also consistent with the AGN feedback discussed above.
 
-% H-AGN NNs
 We train the NN ensemble on the previously identified important features and show the predicted scatter in $\log R_{1/2}$ in~\cref{fig:NNscatter_Reff}. In central galaxies calculating the NN scatter on all important halo properties yields no significant improvement over the bivariate scatter $\sigma_{\log R_{1/2} | \log M_{\rm h}}$. In H-AGN satellites the network learns to attribute $\sim10$ per cent of the scatter to secondary halo properties, however in TNG satellites the inclusion of such features does not reduce the scatter.
 
 \begin{figure*}
@@ -549,11 +485,7 @@ We train the NN ensemble on the previously identified important features and sho
 \end{figure*}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{Galaxy to halo mapping}
-\label{sec:galaxy_to_halo}
+\subsection{Galaxy to halo mapping}\label{sec:galaxy_to_halo}
 
 Our machinery may easily be adapted to learn the inverse of the galaxy--halo connection as we have considered it above, i.e. the mapping from galaxy to halo properties. We consider two sets of galaxy properties as features. The first set includes all galaxy properties summarised in~\Cref{tab:properties} except absolute magnitudes, while the second consists only of absolute magnitudes as the directly observable properties. With the first set we predict both the halo mass $M_{\rm h}$ and spin $\lambda_{\rm h}$, whereas with the second we predict only $M_{\rm h}$. We briefly discuss predicting the halo concentration $c_{\rm h}$ in~\Cref{sec:Discussion}.
 
@@ -571,12 +503,10 @@ As in~\Cref{sec:halo_to_galaxy}, we first train an Extra-Trees algorithm to dete
 
 \subsubsection{Predicting the halo mass}\label{sec:predMhalo}
 
-% ExtraTrees stuff
 Training Extra-Trees on the galaxy properties to predict the halo mass $M_{\rm h}$ yields a maximum $R^2$ of $0.95$/$0.98$ ($0.80$/$0.95$) in H-AGN/TNG centrals (satellites) when all informative features are considered. In~\cref{fig:gal2halo_R2s} we show the $R^2$ scores as a function of the cumulative feature set.
 
 As we show in~\cref{fig:gal2halo_R2s}, in H-AGN centrals the important galaxy properties beyond $M_\star$ are $Z$ and $M_{\rm gas}$. On the other hand, in TNG the most important property that maximises $R^2$ on its own is $M_{\rm gas}$ and the other relevant features are $M_\star$ and $\lambda_{\rm g}$. Going to satellites, in H-AGN  the most important galaxy feature is $M_\star$ and the other informative properties, ordered by decreasing importance, are $Z$, $M_{\rm gas}$, SFR, $q_{\rm g}$ and $\lambda_{\rm g}$. In TNG satellites, the most important feature is again $M_{\rm gas}$, with the other relevant features being $M_\star$, $\lambda_{\rm g}$, $R_{1/2}$ and $s_{\rm g}$. We see that in H-AGN central and satellite galaxies stellar metallicity is the second most important feature and is anti-correlated with $M_{\rm h}$ after removing the $M_\star$ dependence, and that in all cases it is beneficial to consider both $M_\star$ and $M_{\rm gas}$. This is in contrast to the halo-to-galaxy prediction where a single feature, $M_\text{h}$, was unambiguously the most important.
 
-% Simulation scatter
 We show the bivariate scatter $\sigma_{\log M_{\rm h} | \log M_\star}$ in~\cref{fig:NNscatter_Mvir}. In H-AGN the scatter in centrals is $\sim0.2~\mathrm{dex}$ at both low and high $M_\star$, although in between the scatter decreases and at $M_\star\approx 10^{10.3} M_\odot$ it reaches $\sim0.15~\mathrm{dex}$. In TNG the scatter in centrals behaves similarly, though it is consistently lower than in H-AGN, particularly at lower stellar masses. In satellites the scatter at fixed stellar mass grows nearly monotonically from $\sim0.2~\mathrm{dex}$ at low $M_\star$ to $\sim0.4~\mathrm{dex}$ at high $M_\star$ in both H-AGN and TNG. The increase in scatter from low to high $M_\star$ can be understood from the simulated $M_\star - M_{\rm vir}$ relations (see~\cref{fig:sim_data}), which flatten at high $M_\star$. Similarly, in centrals it reaches a minimum at $M_\star \approx 10^{10.3} M_\odot$ where the two parts of the broken power law meet.
 
 The bands in~\cref{fig:NNscatter_Mvir} show the predicted NN ensemble scatter in $\log M_{\rm h}$, binned by $M_\star$. In all cases, the networks visibly learn from properties beyond $M_\star$, since in TNG $M_{\rm gas}$ by itself is marginally even more important than $M_{\star}$. In both H-AGN and TNG central galaxies the addition of the informative features beyond $M_\star$ nearly halves the predicted scatter. In satellites the addition of the important secondary features flattens the increasing scatter at the bright end, partially in H-AGN and completely in TNG.
@@ -585,9 +515,7 @@ The bands in~\cref{fig:NNscatter_Mvir} show the predicted NN ensemble scatter in
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{Figures/NN_scatter_Mvir.pdf}
-    \caption{\acp{NN}' predicted scatter in $\log M_\mathrm{h}$ binned by $\log M_\star$ in H-AGN (\emph{left} column) and TNG (\emph{right} column) for central (\emph{top} row) and satellite (\emph{bottom} row) galaxies, training on galaxy properties. The figure's notation follows that of~\cref{fig:NNscatter_Mstar}. In all cases galaxy properties other than $M_\star$ are substantially informative for predicting $M_\text{h}$.
-    %substantially reduce the predicted scatter.
-    }
+    \caption{\acp{NN}' predicted scatter in $\log M_\mathrm{h}$ binned by $\log M_\star$ in H-AGN (\emph{left} column) and TNG (\emph{right} column) for central (\emph{top} row) and satellite (\emph{bottom} row) galaxies, training on galaxy properties. The figure's notation follows that of~\cref{fig:NNscatter_Mstar}. In all cases galaxy properties other than $M_\star$ are substantially informative for predicting $M_\text{h}$.}
     \label{fig:NNscatter_Mvir}
 \end{figure*}
 
@@ -638,18 +566,13 @@ Several studies have tested the~\citeauthor{MMW_1998} model against hydrodynamic
 To test this further, in~\cref{fig:mvir_spearms} we calculate the Spearman coefficient of the $\lambda_{\rm h}-R_{1/2}/R_{\rm h}$ relation in a moving bin of $\log M_{\rm h}$ of width $0.5~\mathrm{dex}$, separately for centrals and satellites in each simulation. It is expected that $\lambda_{\rm h}$ has a linear correlation with $R_{1/2}/R_{\rm h}$ in the model of~\citeauthor{MMW_1998} (\cref{eq:MMW}), but instead we find that the correlation is always weak ($\rho_{\rm s} < 0.4$). Indeed, in H-AGN it is \emph{negative} for centrals at $M_{\rm h} \approx 10^{12} M_\odot$, indicating that faster-spinning haloes host relatively \emph{smaller} galaxies.
 
 Finally, we consider the correlations of the residuals of the $R_{1/2} - M_\star$, $\lambda_{\rm h} - M_\star$ and $M_{\rm h} - M_\star$ relations to remove the mean trend of these variables with $M_\star$. The residuals are defined by
-% 
 \begin{equation}
     \Delta \log X|M_\star
     \equiv
-    \log(X) - \langle \log(X)|\log(M_\star) \rangle,    
+    \log(X) - \langle \log(X)|\log(M_\star) \rangle,
 \end{equation}
-% 
 where $\langle \log(X)|\log(M_\star) \rangle$ is the expectation for $\log(X)$ at given $\log(M_\star)$ from fitting a shallow forest of decision trees on subsets of the entire data set.
 We plot the resulting correlations for of $\Delta \log \lambda_{\rm h}|M_\star - \Delta \log R_{1/2}|M_\star$ in~\cref{fig:spin_galaxysizeCorr} and $\Delta \log M_{\rm h}|M_\star - \Delta \log R_{1/2}|M_\star$ in~\cref{fig:MvirMstarReff_corr}, indicating in each panel the Spearman's rank correlation coefficient and its uncertainty from bootstrap resamples of the data. We find no particularly significant correlations in either simulation, in contrast to the expectations from the models of~\citeauthor{MMW_1998} and~\citeauthor{Kravtsov_2013}, respectively.
-
-
-% \hd{We say we calculate the $\lambda_h$ residual but we don't show it. That's the one that's most important for the MMW model. Could we add an analogous plot to Fig \ref{fig:MvirMstarReff_corr} but replacing $M_h$ with $\lambda_h$?}
 
 \begin{figure}
     \centering
@@ -661,9 +584,7 @@ We plot the resulting correlations for of $\Delta \log \lambda_{\rm h}|M_\star -
 \begin{figure}
     \centering
     \includegraphics[width=\columnwidth]{Figures/ReffSpin_residuals_corr.pdf}
-    \caption{Correlation between the residuals of the $\lambda_{\rm h}-M_\star$ and $R_{1/2}-M_\star$ relations in H-AGN (\emph{left} column) and TNG (\emph{right} column) central (\emph{top} row) and satellite (\emph{bottom} row) galaxies. These residuals would be strongly correlated in the \citet{MMW_1998} model. Within each panel we indicate the Spearman correlation coefficient and its uncertainty estimated by bootstrapping.
-    % \hd{would it be possible to zoom in on these a bit?}
-    }
+    \caption{Correlation between the residuals of the $\lambda_{\rm h}-M_\star$ and $R_{1/2}-M_\star$ relations in H-AGN (\emph{left} column) and TNG (\emph{right} column) central (\emph{top} row) and satellite (\emph{bottom} row) galaxies. These residuals would be strongly correlated in the \citet{MMW_1998} model. Within each panel we indicate the Spearman correlation coefficient and its uncertainty estimated by bootstrapping.}
     \label{fig:spin_galaxysizeCorr}
 \end{figure}
 
@@ -685,15 +606,11 @@ We conclude that, in accordance with observations and other hydrodynamical simul
 \subsection{The galaxy--halo connections in the Horizon-AGN and Illustris-TNG simulations}\label{sec:sim_comp}
 
 The set of galaxy and halo properties from a simulation populates a region of a high-dimensional space. As a simple example, consider the 3-dimensional space of $M_\star - M_{\rm h} - c_{\rm h}$, with $M_\star$ considered as the dependent variable. A typical, point-wise supervised ML algorithm learns the best-fit surface parameterised by $M_{\rm h}$ and $c_{\rm h}$ on which to find values of $M_\star$ consistent with the training data, such that the true values of $M_\star$ scatter minimally but by an unknown amount around it. On the other hand, our NN ensemble with a Gaussian loss function quantifies this scatter in addition to the optimal manifold, which it learns from the training data of simulated points in the $M_\star - M_{\rm h} - c_{\rm h}$ space. This allows our method to capture fully the range of possible values of $M_\star$, by means of a (Gaussian) probability distribution, from unseen $M_{\rm h}$ and $c_{\rm h}$ values.
-% If those values lie outside the high-density part of the training data the scatter in the predicted $M_{\star}$ will naturally grow \hd{not sure I understand this: will the scatter grow or the uncertainty on it?}.
-% \rs{I'm tempted to remove this sentence, either way we don't justify this and it'd be stretching the analogy too far. I think this was justified in the original paper.} \hd{fine by me}
 
 The scatter that we are interested in learning represents the statistical uncertainty that describes the stochasticity of the simulated galaxy--halo connections, and which will tend towards a constant, typically non-zero value in the limit of infinite number of training samples. This is approximately summed in quadrature with an additional uncertainty due to the finite number of training samples. Going back to the example of the optimal manifold, parameterised by $M_{\rm h}$ and $c_{\rm h}$, the statistical uncertainty represents the scatter around the best-fit manifold.
 By means of bootstrap resampling and training the models on subsets of the data we have verified that the contribution to the scatter from the finite size of the training set is subdominant to the intrinsic scatter. An important source of systematic uncertainty is the dependence of the results on the astrophysical and cosmological parameters assumed in the simulations. While we have some information on this from our use of two different simulations, a systematic investigation is lacking (see also~\cref{sec:future}).
 
-We have trained our models on informative features only, by adding a feature only if it improves the $R^2$ score on the test set
-%compared to when the model is trained without it
-by at least $\Delta R^2 = 0.005$. In~\cref{fig:halo2gal_R2,fig:gal2halo_R2s,fig:neutral_hydrogen_R2s} we observe that training a model on additional, non-informative features may marginally worsen the goodness-of-fit, despite Extra-Trees being known for resistance to the presence of non-informative features. Furthermore, with our NN ensemble we observe that the variation between  the models artificially increases, with the NNs being less likely to converge to a ``good'' minimum of the loss function if trained on uninformative features as well. This makes it preferable to invest time in determining which features are important for predicting a given target to achieve optimal performance, as opposed to inputting all available features into the model, many of which may act only as noise with respect to the target quantity. We now discuss our results for learning to predict $M_\star$, $M_{\rm gas}$, $R_{1/2}$, $M_{\rm HI}$ and $M_{\rm h}$.
+We have trained our models on informative features only, by adding a feature only if it improves the $R^2$ score on the test set by at least $\Delta R^2 = 0.005$. In~\cref{fig:halo2gal_R2,fig:gal2halo_R2s,fig:neutral_hydrogen_R2s} we observe that training a model on additional, non-informative features may marginally worsen the goodness-of-fit, despite Extra-Trees being known for resistance to the presence of non-informative features. Furthermore, with our NN ensemble we observe that the variation between  the models artificially increases, with the NNs being less likely to converge to a ``good'' minimum of the loss function if trained on uninformative features as well. This makes it preferable to invest time in determining which features are important for predicting a given target to achieve optimal performance, as opposed to inputting all available features into the model, many of which may act only as noise with respect to the target quantity. We now discuss our results for learning to predict $M_\star$, $M_{\rm gas}$, $R_{1/2}$, $M_{\rm HI}$ and $M_{\rm h}$.
 
 In~\cref{fig:halo2gal_R2} we show that $M_\star$ can be predicted from the halo properties in both central and satellite galaxies with similar, high accuracy ($R^2 > 0.9$), which is consistent with previous studies~\citep{Kamdar_2016,de_Santi_2022,Lovell_2021,Chen_2021}. While in H-AGN the only relevant property beyond $M_\text{h}$ is $c_{\rm h}$, yielding $\Delta R^2 \approx 0.07$, in TNG the combination of $\lambda_{\rm h}$, $R_{\rm h}$ and $c_{\rm h}$ is required. On the other hand, in satellite galaxies we find that in both simulations the halo size $R_{\rm h}$ along with $c_{\rm h}$ is required to match the goodness-of-fit of central galaxies. Secondary halo features account for $\sim50$ per cent of the scatter in the $M_\star - M_{\rm h}$ relation as shown in~\cref{fig:NNscatter_Mstar}, indicating that their inclusion may benefit semi-empirical models such as SHAM, especially in satellites. That the features required to predicted masses are similar for both simulations is consistent with other work~\citep{Villaescusa_Navarro_2021,Chen_2021}, although we find that the relevant features for other properties (e.g. $R_{1/2}$) are simulation-dependent.
 
@@ -703,19 +620,15 @@ Predictions of the stellar half-mass radius $R_{1/2}$ are strongly simulation-de
 
 As expected from the results above, we find the central-galaxy-to-$M_{\rm h}$ connection to be near perfectly constrained in both H-AGN and TNG ($R^2 \approx 0.95, 0.98$, respectively). The satellite connection is not as well constrained ($R^2 \approx 0.8, 0.9$), however, as we show in~\cref{fig:gal2halo_R2s}. Properties beyond $M_\star$ account for up to $50$ per cent of the scatter in the $M_{\rm h} - M_\star$ relation (\cref{fig:NNscatter_Mvir}), such that the central and satellite halo masses can be constrained with an uncertainty of $\sim~0.1~\mathrm{dex}$ and $\sim~0.1-0.2~\mathrm{dex}$, respectively. This is comparable to the scatter found in similar studies which analyse the CAMELS simulations~\citep{Villanueva_Domingo_2021,Shao_2021}. The central halo mass can be nearly as well predicted from magnitudes only, although in satellites the predictions are again worse (\cref{fig:gal2halo_R2s}). We find the $i$-band magnitude to be the most important, as expected from its strongest correlation with $M_\star$ compared to the other bands. Although, if magnitudes only are used as inputs, we find that the scatter in $M_{\rm h}$ starts significantly growing towards brighter galaxies. The predictive power of raw photometry is comparable to that found by~\cite{vonMarttens_2021}, who also studied the TNG simulations but with a Tree-based Pipeline Optimization Tool~\citep{Olson_2016}. They found that the total mass could be predicted from magnitudes with $R^2 \lesssim0.86$ and from all features with $R^2 \approx 0.98$, again in agreement with our results (see~\Cref{sec:predMhalo}).
 
-%\blue{
 We also consider predicting the halo spin, finding in both simulations that no combination of galaxy properties can predict $\lambda_{\rm h}$ to better than $R^2 \approx 0.25$. \cref{fig:halo2gal_R2} shows that the stellar half-mass radius $R_{1/2}$ is never a particularly important feature for predicting $\lambda_{\rm h}$. This provides further evidence that the model of~\citealt{MMW_1998} is not present in either H-AGN or TNG, which implies that $R_{1/2}$ should be proportional to $\lambda_{\rm h}$ (\cref{eq:MMW}).
 
 Lastly, we also test learning to predict the halo concentration $c_{\rm h}$ from galaxy properties, finding that the results are strongly dependant on the concentration definition. In H-AGN the concentration is poorly constrained from the galaxy features with $R^2 \approx 0.53, 0.38$ in central and satellite galaxies, respectively. In TNG these numbers are $R^2\approx0.12, 0.32$. This suggests that in case of TNG centrals the model can do little better than predict the average value of concentration. As per~\Cref{sec:halo_concentration}, we define the concentration to be the ratio between $R_{\rm h}$ and $r_{\rm s}$. However, while in H-AGN $R_{\rm h}$ is the virial radius of the halo, in TNG it is the distance to the furthest gravitationally bound \ac{DM} particle. A consequence is that the halo concentration correlates much more weakly with halo mass in TNG than in H-AGN and is therefore less predictable from galaxy variables.
-%}
 
-\subsection{Future work}
-\label{sec:future}
+\subsection{Future work}\label{sec:future}
 
 \subsubsection{Applications}
 
 Our method has a range of applications. The most obvious is to elucidate the galaxy--halo connections in hydrodynamical simulations by quantifying the intrinsic scatter of various multi-parameter correlations. This in turns promotes understanding of the effects of the feedback and subgrid prescriptions implemented in the simulations, and informs the construction of semi-empirical and semi-analytic models that attempt to capture the salient parts of this physics. In common with other machine learning analyses, our techniques also allow hydrodynamical simulation to be bypassed in connecting galaxy and halo variables. This can be used either to paste galaxies onto haloes produced in $N$-body simulations in a manner that mimics their association in full-physics simulations, or, in the opposite direction, to infer haloes from observed galaxies. The former is useful for making mock universes from cheap \ac{DM}-only simulations---which can then be used either for forecasting upcoming cosmological galaxy surveys~\citep[e.g.][]{Reddick_2014, Zhang_2019, Kasmanoff_2020, Wechsler2021Addgals} or for validating and developing analysis pipelines for these surveys \citep[e.g.][]{DeRose2019Buzzard}---while the latter is useful for estimating the distribution of \ac{DM} associated with the observed distribution of light. This has been explored in the context of predicting halo masses of an observed galaxy and group catalogue from the Sloan Digital Sky Survey, finding that it outperforms conventional halo abundance matching or dynamical mass modelling~\citep{Calderon_2019}
-
 
 The advantage of using machine learning applied to simulations is that it provides a powerful way of capturing \emph{all} relevant correlations, regardless of their (unknown) functional form, at the cost of reduced generality in that the model is specific to the simulation it was trained on. We have seen important similarities and differences between the galaxy--halo connections of Horizon-AGN and IllustrisTNG, indicating that some parts of the model are robust to simulation-specific physics while others are not. In the future, techniques such as Domain Adaptation and Transfer Learning could be used to generalise the ML models and extend their functionality across multiple data sets and hence create less simulation-specific results \citep[e.g.][]{Ciprijanovic2021DomAdap}.
 
@@ -751,11 +664,8 @@ We build an ensemble of \aclp{NN} with a Gaussian loss function to study the $z=
 Our main findings are:
 \begin{itemize}
     \item While the halo-to-stellar mass relation is well-constrained in central galaxies, with a relatively low importance of any other halo quantity, properties such as the halo size and concentration play an important role in satellite galaxies. After accounting for these properties the main halo and subhalo masses can be predicted nearly equally well ($R^2 \geq 0.9$). Secondary properties account for up to $0.1~\mathrm{dex}$ and $0.2~\mathrm{dex}$ of the scatter in the $M_\star - M_{\rm h}$ relation in central and satellite galaxies, respectively.
-    % 
     \item In both H-AGN and TNG, stellar mass is more predictable from halo properties than the total gas mass with $R^2$ higher by $\sim0.05$ and $\sim0.10$ in central and satellite galaxies, respectively. The halo-to-neutral hydrogen mass relation is poorly constrained with $R^2\approx0.5$.
-    % 
     \item Main halo masses can be predicted near perfectly in both simulations from galaxy properties ($R^2 \geq 0.95$), although not subhalo masses. Furthermore, while the main halo mass can be predicted as well from magnitudes only, that is not the case for subhaloes. The uncertainty in the halo mass is $\sim0.1$ and $0.2~\mathrm{dex}$ in centrals and satellites, respectively, after accounting for all galaxy properties. However, if only directly observable properties (photometric magnitudes) are considered then the uncertainty grows towards the bright end, most notably in satellites where it reaches up to $\sim0.4~\mathrm{dex}$.
-    % 
     \item We find that galaxy size-based semi-analytical models are not at play in either H-AGN nor TNG, although the quantitative correlations relevant to these models are simulation-dependent. In both simulations the correlation between galaxy and halo size can essentially be reduced to the separate correlations of galaxy size with stellar mass, stellar mass with halo mass and halo mass with halo size.
 \end{itemize}
 
@@ -781,7 +691,5 @@ We make our \ac{NN} implementation publicly available at \url{https://github.com
 \bibliographystyle{mnras}
 \bibliography{ref}
 
-% Don't change these lines
-% \bsp	% typesetting comment
 \label{lastpage}
 \end{document}
