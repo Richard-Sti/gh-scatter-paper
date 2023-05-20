@@ -1,3 +1,5 @@
 paper.bbl
 paper.synctex.gz
 paper.pdf
+.vscode/settings.json
+.gitignore
