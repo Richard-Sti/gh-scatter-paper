@@ -1,0 +1,237 @@
+- Fig. 11: What is the origin of the weird bump
+    - \da{The correlation behavior for H-AGN centrals at $M_h = 10^{11}$ is very weird because of that narrow ``oscillation'' feature in the blue line in Fig 11. You definitely need to say something about either why that feature exists, or why it does not worry you.}\rs{It does not pop up with Pearson linear correlation, but yeah it's weird.}
+    - \hd{Is it qualitatively weirder than other features though, like the bump at 12.5?}
+    - \da{Are we okay with not addressing the oscillation feature in H-AGN centrals at low mass? Doesn't seem like it's physical, and might make one question the validity of the rest of the plot (especially about the tight uncertainties we're quoting at that mass range).}
+
+
+- Metallicity among photometric quantities?
+
+\rs{Notation: my preferred way is halo: central galaxy, subhalo referring to a satellite galaxy's halo}
+
+- comment more on the figure captions
+
+
+H-AGN gas:
+Star forming:
+    - This is all gas whose hydrogen number density is >= 0.1/cm^3, which is the threshold for star formation in H-AGN
+Hot diffuse:
+    - Gas of hydrogen number density < 0.1/cm^3 and temperature T >= 1e5 K
+Cold collimated gas:
+    - Gas of temperature T<1e5 K in hydrogen number density range 100 rho_avg <= rho < 0.1/cm^3, where rho_avg is the mean hydrogen number density of the universe
+Cold diffuse gas:
+    - Gas of temperature T<1e5 K with hydrogen number density < 100 rho_avg
+and these definitions are based on those used in https://arxiv.org/pdf/1206.5838.pdf. You can find the masses of each of these components for each galaxy in
+
+
+---------------------------------------------------------------
+
+\section{Literature gathered}
+
+\db{Anything olive has been used or there is a comment to use it in a certain section}
+
+Machine Learning Methods
+
+\begin{itemize}
+    \item Probabilistic random forests \url{https://arxiv.org/abs/1811.05994} and \url{https://arxiv.org/abs/0806.3286}
+    \green{\item Reconciling modern machine learning practice and the bias-variance trade-off \url{https://arxiv.org/abs/1812.11118}}
+    \green{\item Solving high-dimensional parameter inference:
+marginal posterior densities \& Moment Network \url{https://arxiv.org/abs/2011.05991}}
+\end{itemize}
+
+Machine Learning for Galaxies/Halos
+
+\hd{This is an interesting point and relates to a paper from a while ago comparing photometric vs kinematic features (maybe in TNG?) and finding that the photometric features are surprisingly important. We should compare to that and also try to explain (maybe in Discussion) why this is.}
+\green{
+\begin{itemize}
+    \item Modeling the galaxy-halo connection with machine learning \url{https://arxiv.org/pdf/2111.02422.pdf}
+    %     \begin{itemize}
+    %         \item TNG
+    %         \item predict halo occupation distribution
+    %         \item random forest regressor to identify which secondary halo parameters best model the galaxy-halo connection
+    %         \item symbolic regression too
+    %         \item satellite galaxies in high mass halos prefer- entially occupy anisotropic and denser environments.
+    %         \item central galaxies in low mass halos also preferentially occupy anisotropic and denser environments.
+    %         \item incorporating environmental overdensity and shear as training features, in addition to halo mass, resulted in improved prediction ... $\sim10\%$ improvement in clustering
+    %    \end{itemize}
+    \item Inferring galaxy dark halo properties from visible matter with Machine Learning \url{https://arxiv.org/abs/2111.01185}
+    %     \begin{itemize}
+    %         \item Tree-based Pipeline Optimization Tool (considers all models in all models available in scikit-learn)
+    %         \item predict the DM content of galaxies from “luminous” observational-like parameters
+    %         \item TNG100
+    %         \item split photometric, structural and kinematic data
+    %         \item predict the total DM mass, DM half-mass radius, DM mass inside one and two stellar half-mass radii.
+    %         \item Photometric features alone are able to predict the total DM mass with fair accuracy ($R^2 \lesssim 0.86$)
+    %         \item Structural and Photometric features together are more effective to determine the DM inside the stellar half mass radius ($0.88\lesssim R^2 \lesssim 0.94$) and  DM within twice the stellar half mass radius ($0.90\lesssim R^2 \lesssim 0.92$)
+    %         \item Using all improves $R^2 \sim 0.98$
+    %     \end{itemize}
+    \item A machine learning approach to mapping baryons onto dark matter haloes using the EAGLE and C-EAGLE simulations \url{https://arxiv.org/abs/2106.04980}
+        % \begin{itemize}
+        %     % \item EAGLE and C-EAGLE (zoom)
+        %     % \item Extremely Randomised Trees
+        %     \item predict the baryonic properties of galaxies based on their host dark matter halo properties
+        %     \item successfully predicts the stellar mass, stellar velocity dispersion and black hole mass, and provides reasonable predictions for the star formation rate, stellar metallicity and total gas mass
+        %     \item Star formation rates and gas masses are biased low
+        %     % \item Adding features representing the local density leads to a negligible increase in the predictive accuracy for most properties, except the gas mass
+        % \end{itemize}
+    \item Inferring halo masses with Graph Neural Networks \url{https://arxiv.org/abs/2111.08683}
+    %     \begin{itemize}
+    %         \item CAMELS
+    %         \item Graph Neural Networks
+    %         \item  infers the mass of a halo given the positions, velocities, stellar masses, and radii of the galaxies it host
+    %         \item able to constrain the masses of the halos with a $\sim0.2$ dex accuracy
+    %         \item trained on a suite of simulations is able to preserve part of its accuracy when tested on simulations run with a different code that utilizes a distinct subgrid physics model
+    %     \end{itemize}
+    \item Finding universal relations in subhalo properties with artificial intelligence \url{https://arxiv.org/pdf/2109.04484.pdf}
+    %     \begin{itemize}
+    %         % \item CAMELS
+    %         % \item  determine if the total mass of a subhalo can be predicted from other internal properties such as velocity dispersion, radius, or star-formation rate.
+    %         % \item Neural networks
+    %         % \item Over 99\% subhalos predicted mass within 0.2dex of true value
+    %         \item accurately predict the total mass of any type of subhalo containing any kind of galaxy at any redshift from simulations with different cosmologies, astrophysics models, subgrid physics, volumes, and resolutions, indicating that the network may have found a universal relation
+    %         % \item symbolic regression to predict the total mass of a subhalo from its radius, velocity dispersion, and maximum circular velocity.
+    %     \end{itemize}
+    \item Mimicking the halo-galaxy connection using machine learning \url{https://arxiv.org/abs/2201.06054}
+    %     \begin{itemize}
+    %         \item IllustrisTNG300
+    %         \item four different algorithms: extremely randomized trees (ERT), K-nearest neighbors (kNN), light gradient boosting machine (LGBM), and neural networks (NN), along with a stacked model where we combine results from all four approaches
+    %         \item ML algorithms produce consistent results in terms of predicting galaxy properties from a set of input halo properties that include halo mass, concentration, spin, and halo overdensity
+    %         \item stellar mass, the (predicted v. true) Pearson correlation coefficient is 0.98, dropping down to 0.7-0.8 for specific star formation rate (sSFR), colour, and size
+    %         \item Our results align with previous reports suggesting that certain galaxy properties cannot be reproduced using halo features alone.
+    %         \item \db{Check Kamdar et al. 2016; Lovell et al. 2022}
+    %     \end{itemize}
+    \item Multi-Epoch Machine Learning 1: Unravelling Nature vs Nurture for Galaxy Formation \url{https://arxiv.org/abs/2112.08424}
+        % \begin{itemize}
+            % \item extremely randomized tree 
+            % \item IllustrisTNG
+            % \item predicting the baryonic properties of dark matter only subhalos from N-body simulations
+            % \item takes subhalo properties over a wide range of redshifts as its input features.
+            % \item predict blackhole mass, gas mass, magnitudes, star formation rate, stellar mass, and metallicity
+            % \item  produce feature importance plots for each baryonic property, and find that they differ significantly.
+            % \item low redshifts as being most important for predicting star formation rate and gas mass
+            % \item high redshifts being most important for predicting stellar mass and metallicity
+            % \item physical properties of galaxies investigated in this study are all driven by nurture and not nature. The only property showing a somewhat stronger impact of nature is the present-day star formation rate of galaxies
+            % \item When compared with a baseline model that only uses $z=0$ input features, the new model yields significantly more accurate predictions.
+        % \end{itemize}
+    \item MAHGIC: A Model Adapter for the Halo-Galaxy Inter-Connection \url{https://arxiv.org/abs/2106.03984}
+        % \begin{itemize}
+        %     \item Principal Component Analysis (PCA) to reduce the dimensionality of both the mass assembly histories of halos/subhalos and the star formation histories of galaxies
+        %     \item Gradient Boosted Decision Trees (GBDT) to transform halo/subhalo properties into galaxy properties.
+        %     \item two sets of hydrodynamic simulations (TNG and EAGLE)
+        %     \item The final set of subhalo properties used by MAHGIC include halo mass, the MAH and the orbit.
+        %     \item stellar properties used as the target variables are stellar mass and SFH of individual galaxies
+        %     \item \db{Bayesian networks (e.g., Bishop 2006; Lu et al. 2011, 2012; Behroozi et al. 2019}
+        % \end{itemize}
+    \item Determining the Dark Matter distribution in galaxies with Deep Learning \url{https://arxiv.org/abs/2111.08725}
+    %     \begin{itemize}
+    %         \item convolutional neural network
+    %         \item Illustris–TNG100
+    %         \item infer the Dark Matter (DM) content and spatial distribution within galaxies
+    %         \item capable of inferring the DM mass distribution within galaxies of mass $10^{11}=10^{13} M_{\sun}$
+    %         \item not relying on a pre-assigned shape for the DM distribution
+    %         \item output of the network is the DM profile that consist of 20 scalar quantities, that correspond to the total DM mass enclosed within 20 radial galactocentric distances that are logarithmically spaced between 1 and 100kpc.
+    %     \end{itemize}
+    \item Machine Learning and Cosmological Simulations II: Hydrodynamical Simulations \url{https://arxiv.org/abs/1510.07659} (Kamdar)
+    \item Painting galaxies into dark matter halos using machine learning \url{https://arxiv.org/abs/1712.03255} \cite{Agarwal_2018}
+    %     \begin{itemize}
+    %         \item MUFASA
+    %         \item input halo properties including halo mass, environment, spin, and recent growth history
+    %         \item outputs central galaxy and halo baryonic properties including stellar mass, star formation rate (SFR), metallicity (Z), neutral and molecular hydrogen mass
+    %         \item recovers the mean trends of output quantities with halo mass highly accurately
+    %         \item the scatter around the mean relations is under-predicted
+    %         \item For the random forest algorithm, we find that halo mass and nearby ($\sim$200 kpc) environment are the most important predictive variables followed by growth history, while halo spin and $\sim$Mpc scale environment are not important.
+    %         \item providing the SFR enables neutral hydrogen mass to be recovered substantially more accurately.
+    %     \end{itemize}
+    \item Machine-assisted semi-simulation model (MSSM): estimating galactic baryonic properties from their dark matter using a machine trained on hydrodynamic simulations \url{https://arxiv.org/abs/1908.09844} \cite{Yongseok_2019}
+        % \begin{itemize}
+        %     \item extremely randomized tree (ERT) algorithm is used together with multiple novel improvements
+        %     \item IllustrisTNG
+        %     \item predict stellar mass and star formation rate in a galaxy-sized halo based purely on its DM content
+        %     \item model demonstrates a significantly increased accuracy in predicting baryonic properties compared to prior attempts
+        % \end{itemize}
+    \item The Fundamental Relation between Halo Mass and Galaxy Group Properties \url{https://arxiv.org/abs/1907.01560} \cite{Man_2019}
+        % \begin{itemize}
+        %     \item Random Forest
+        %     \item semianalytical model L-GALAXIES
+        %     \item galaxy group halo mass and various observable group properties
+        %     \item a simple scenario that describes the evolution of the central galaxies and their host dark matter halos
+        %     \item group halo mass can be more accurately determined from observable galaxy properties by the RF regressor with a 50\% reduction in error
+        % \end{itemize}
+\end{itemize}
+}
+\begin{itemize}
+    \item \green{Prediction of galaxy halo masses in SDSS DR7 via a machine learning approach} \url{https://arxiv.org/abs/1902.02680} (Calderon) %\hd{I think we should cite this one somewhere because it's (one of) the only that go from galaxies to halos rather than the other way round. The other papers here that aren't in olive I don't think we need to cite (although we could).}
+        % \begin{itemize}
+        %     \item Three ML algorithms (\texttt{XGBoost}, Random Forests, and neural network)
+        %     \item Synthetic galaxy catalogues that are built by populating dark matter haloes in N-body simulations with galaxies
+        %     \item We find that mass predictions from the ML algorithms are more accurate than those from halo abundance matching (\texttt{HAM}) or dynamical mass (\texttt{DYN}) estimates
+        % \end{itemize}
+    \item \green{dm2gal: Mapping Dark Matter to Galaxies with Neural Networks} \url{https://arxiv.org/abs/2012.00186}
+        % \begin{itemize}
+        %     \item TNG100-1
+        %     \item convolutional neural networks
+        %     \item model outperforms the state-of-the-art benchmark model
+        %     \item paint galaxy stellar masses on top of the dark matter field
+        %     \item quantify the agreement between the predicted, HOD, and simulation stellar mass fields using three different summary statistics: 1) the power spectrum, 2) the bispectrum, and 3) the probability distribution function (PDF)
+        % \end{itemize}
+    \item \green{From Dark Matter to Galaxies with Convolutional Networks \url{https://arxiv.org/abs/1902.05965}}
+    %     \begin{itemize}
+    %         \item convolutional neural networks
+    %         \item Illustris
+    %         \item deep learning to establish a mapping between the 3D galaxy distribution in hydrodynamic simulations and its underlying dark matter distribution
+    %     \end{itemize}
+\end{itemize}
+
+The galaxy-halo connection (no ML)
+
+\begin{itemize}
+    \item Scatter in the satellite galaxy SHMR: fitting functions, scaling relations \& physical processes from the IllustrisTNG simulation \url{https://arxiv.org/abs/2201.07817}
+    \green{\item Galaxy size to halo spin relation of disk galaxies in cosmological hydrodynamical simulations (Yang) - \url{https://arxiv.org/abs/2110.04434}}
+    \green{\item On the galaxy–halo connection in the EAGLE simulation \url{https://academic.oup.com/mnrasl/article/471/1/L11/3867308}}
+    \green{\item The galaxy-halo size relation of low-mass galaxies in FIRE \url{https://arxiv.org/abs/2112.05159}}
+    \green{\item Harry's work on dynamical scaling relations suggested an anticorrelation between galaxy size and halo mass at fixed stellar mass \url{https://arxiv.org/abs/1706.01017} \url{https://arxiv.org/abs/1607.01800}}
+    \item Toward Accurate Modeling of Galaxy Clustering on Small Scales: Constraining the Galaxy-Halo Connection with Optimal Statistics \url{https://arxiv.org/abs/2110.03701}
+    \item Stellar Property Statistics of Massive Halos from Cosmological Hydrodynamics Simulations: Common Kernel Shapes \url{https://arxiv.org/abs/2001.02283}
+    \item The Galaxy Clustering Crisis in Abundance Matching \url{https://arxiv.org/abs/1705.06347} (seems the "crisis" is in Mpeak-based models though, while Vpeak models are pretty much OK...)
+    \item LCDM halo substructure properties revealed with high resolution and large volume cosmological simulations - inner subhalos are more concentrated \url{https://arxiv.org/abs/2110.02097}
+\end{itemize}
+
+The galaxy-halo connection (observations)
+
+\begin{itemize}
+    \item Suggests a strong relation between specific ang. momenta of halos and galaxies (massive) \url{https://arxiv.org/abs/2109.03828} %\hd{The only thing I see to suggest this is that the average sizes of galaxies are reproduced if $j_\text{gal} \sim 0.7 j_\text{hal}$. This has been known for a long time (it's in Desmond \& Wechsler 2015, fig 4, but even before that I think), but this proportionality between $j_\text{gal}$ and $j_\text{hal}$ causes a number of problems in the TFR and mass--size relation. IMO it's almost certainly wrong.}
+    \item The halo mass function of late-type galaxies from HI kinematics \url{https://arxiv.org/abs/1911.00517}
+    \item Galaxy And Mass Assembly (GAMA) \url{https://arxiv.org/abs/2109.06136}
+    \item Galaxies appear simpler than expected \url{https://arxiv.org/abs/0811.1554}
+    \item The Outer Stellar Mass of Massive Galaxies: A Simple Tracer of Halo Mass with Scatter Comparable to Richness and Reduced Projection Effects \url{https://arxiv.org/abs/2109.02646}
+\end{itemize}
+
+
+\green{Semi-analytic models
+
+\begin{itemize}
+    \item Popular model that claims galaxy and halo sizes are proportional \url{https://iopscience.iop.org/article/10.1088/2041-8205/764/2/L31/meta} 
+\end{itemize}
+}
+
+Simulations
+
+\begin{itemize}
+    \green{\item Interesting series of papers coming out. See Fig. 4 of the first one which shows that algorithms trained on one hydro sim can completely fail when applied to another. \url{https://arxiv.org/abs/2109.09747}, \url{https://arxiv.org/abs/2109.10360}}
+    \item Cosmology with one galaxy? \url{https://arxiv.org/abs/2201.02202}
+    \item Lagrangian Deep Learning for effective laws of physics from simulation/data \url{https://arxiv.org/abs/2010.02926}
+\end{itemize}
+
+
+
+
+
+
+
+---------------------------------------------------------------
+Some old pieces of text
+
+% \rs{Possiblt remove the permutation importance part}
+% One additional feature of decision tree-based models compared to, e.g., NNs is that an impurity feature importance may be defined, which is the total impurity decrease per feature. In the case of forest ensembles the scores are averaged over the trees. However, because the impurity feature importance is calculated during training it may fail to generalise well to new samples, especially if the forest itself is over-fitted.
+
+% % Permutation score
+% We therefore prefer a ``permutation'' feature importance, which can be calculated for any \emph{fitted} predictive model on unseen samples from the test set. This is done by first calculating a reference score $\mathcal{S}$ (see below) using the full set of features. Next, the $i$\textsuperscript{th} feature is permuted, thus randomising its correlation with the other features and targets and a new score $\mathcal{S}_i$ is calculated, which is repeated several times to obtain a reliable estimate. Finally, the permutation importance score of the $i$\textsuperscript{th} feature is given by the difference between $\mathcal{S}$ and the average $\mathcal{S}_i$. If a feature's permutation score is high, then the model loses its predictive power without access to it ($\mathcal{S}_i \rightarrow 0$). Conversely, if the permutation score is low then the feature is either irrelevant or strongly correlated with another feature ($\mathcal{S}_i \rightarrow \mathcal{S}$). It is imperative that only predictive models are used to calculate permutation importance scores: a model with poor predictions on the test set will yield meaningless permutation scores. We normalise the permutation feature importance such that its sum is $1$.

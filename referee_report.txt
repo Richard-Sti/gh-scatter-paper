@@ -1,0 +1,56 @@
+We are very grateful to the referee for their constructive comments. We provide responses to the referee’s points below, and attach an updated version of the manuscript with modifications in red. 
+
+
+------------------------------
+"The related work section could be more systematic (page 1, column 2, 52-60). For example, "Supervised Learning Algorithms" can refer to all approaches listed here (von Marttens et al. employ a model selection pipeline with Random Forests, SVMs, etc.), "Tree-based ML methods" by Lovell et al. refers to the Extra Trees, which are used in this paper as well and "Neural Networks" (Moster et al.,...) could be more specific too, e.g. neural networks with fully connected layers."
+
+- We have re-organised the section, focusing first on tree-based models and then neural-network based models.
+
+
+------------------------------
+"The machine learning methodology is well explained and mainly follows the setup by Lakshminarayanan et al., however it is not clear how the adversarial examples are created. Is the procedure similar to Lakshminarayanan et al. and do you use a constant ε or is it scaled depending on the training data range? It would also be helpful to give the learning rate used during training."
+
+- In Section 3.3 we describe the fast gradient sign method of adversarial samples generation with constant ε. We also describe the learning rate hyperparameters at the end of Section 3.3.
+
+
+------------------------------
+"It would have been better to choose the ordered features list based on a validation set that is identical to the one used during training of the neural networks (and not based on the test set), although I doubt that this will change the order."
+
+- We agree that selecting the features based on the validation set instead and keeping the test set unseen would have been preferable, although because of the relatively large sample size of O(10^4) this would indeed be very unlikely to change the order, particularly in the case of the important features.
+
+
+------------------------------
+"As discussed in 6.3.2, the Gaussian loss function works very well when the distribution of Y conditioned on X is approximately Gaussian, which might not always be true (for example, when predicting the star formation rate). As shown in Lakshminarayanan et al., the performance of the deep ensemble setup (which is similar to this paper) in terms of MSE is for some data sets worse when trained using the Gaussian loss function than when trained using the MSE. This could indicate that the assumption that Y|X is approximately Gaussian is violated. For Figure 2, the R^2 scores of the Extra-Tree models are reported to be within 1 percent of the NN ensemble. Is this also true for Figures 5 and 7 or is the Extra-Tree model slightly better?"
+
+- With our data sets we do not observe any significant difference in R^2 scores between the NN ensemble and a RF even if the overall R^2 score is low. However, upon closer inspection we find that if the R^2 score is <~ 0.5 (as measured by either model) then the percentage difference between the models may be more significant although the NN may actually perform better. For example, for Fig. 5 where we predict the HI mass for central TNG galaxies we copy the comparison between the two models below. We add a brief mention of this in Section 4.1.
+
+Only M_h
+NN R2: 0.3817
+RF R2: 0.3413
+Diff: 10.5895 %
+
+Adding lambda_h
+NN R2: 0.4545
+RF R2: 0.4250
+Diff: 6.4891 %
+
+Adding s_h
+NN R2: 0.4598
+RF R2: 0.4444
+Diff: 3.3402 %
+
+Adding c_h
+NN R2: 0.4673
+RF R2: 0.4528
+Diff: 3.1089 %
+
+
+------------------------------
+"Where applicable, the results are shown to be consistent with the related work (although no direct comparison regarding the R^2 scores is given. This could have indicated the superiority of one method over the others in terms of accuracy, given a similar  experiment setup)."
+
+- We do not expect our method to yield significantly superior R^2 scores (calculated from the mean predicted values) compared to alternative algorithms which are typically sufficiently flexible to extract whichever correlations are present in the data. However, we argue that our method is a relatively simple extension applicable to certain NN-like models to also quantify the predictive uncertainty.
+
+------------------------------
+"Overall, the methodology is very sound (with the mentioned drawbacks) and the analysis of the results is clear and precise. My review focuses on sections 1,3,4,6 and 7 and less on 2 and 5. I have recommended the paper for minor revision."
+
+- We thank the referee again for their helpful comments. Finally, at the end of Section 3.3 and in the Data Availability section we now include a link to a Github repository with our NN model.
