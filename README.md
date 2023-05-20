@@ -9,4 +9,4 @@ We apply machine learning, a powerful method for uncovering complex correlations
 
 
 ## Reference
-[1] Richard Stiskalek and others, The scatter in the galaxy–halo connection: a machine learning analysis, Monthly Notices of the Royal Astronomical Society, Volume 514, Issue 3, August 2022, Pages 4026–4045, https://doi.org/10.1093/mnras/stac1609
+[1] Richard Stiskalek, Deaglan J Bartlett, Harry Desmond and Dhayaa Anbajagane, The scatter in the galaxy–halo connection: a machine learning analysis, Monthly Notices of the Royal Astronomical Society, Volume 514, Issue 3, August 2022, Pages 4026–4045, https://doi.org/10.1093/mnras/stac1609
